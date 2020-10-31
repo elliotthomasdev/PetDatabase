@@ -40,15 +40,32 @@ public class Main {
                 case 4:
                     searchAge();
                     break;
-                // Break loop
                 case 5:
+                    removePet();
+                    break;
+                // Break loop
+                case 6:
                     break loop;
-
             }
         }
     }
 
     /* Methods */
+
+    // Method for removing a pet
+    public static void removePet() {
+        // Displays the list of pets
+        showAllPets();
+
+        // Prompts user for ID
+        System.out.print("Enter the pet ID to remove: ");
+
+        //Gets ID and removes selected ID from the pet DB
+        int id = input.nextInt();
+        System.out.println(db.getPet(id).getName() + " " + db.getPet(id).getAge() + " is removed");
+        db.remove(id);
+
+    }
 
     // Search for pet by name
     private static void searchName(){
@@ -79,7 +96,7 @@ public class Main {
 
     // Search for pet by age
     private static void searchAge() {
-        // Gettting input
+        // Getting input
         System.out.print("Enter age to search:");
         int age = input.nextInt();
 
@@ -110,7 +127,8 @@ public class Main {
         System.out.println(" 2) Add a new pet");
         System.out.println(" 3) Search pets by name");
         System.out.println(" 4) Search pets by age");
-        System.out.println(" 5) Exit program");
+        System.out.println(" 5) Remove an existing pet");
+        System.out.println(" 6) Exit program");
 
         System.out.print("Your choice: ");
         // Returns choice

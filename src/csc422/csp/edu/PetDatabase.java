@@ -17,9 +17,19 @@ public class PetDatabase {
         return pets;
     }
 
+    // Get an individual pet
+    public Pet getPet(int id){
+        return pets.get(id);
+    }
+
     // Get the size of the pet list
     public int getCount(){
         return pets.size();
+    }
+
+    // Remove a pet from the DB
+    public void remove(int id){
+        pets.remove(id);
     }
 
 }
