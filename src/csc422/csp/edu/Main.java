@@ -38,6 +38,7 @@ public class Main {
                     break;
                 // Search for a pet by age
                 case 4:
+                    searchByAge();
                     break;
                 // Break loop
                 case 5:
@@ -76,6 +77,31 @@ public class Main {
         printTableFooter(numberOfPets);
     }
 
+    // Search for pet by age
+    private static void searchByAge() {
+        // Gettting input
+        System.out.print("Enter age to search:");
+        int age = input.nextInt();
+
+        // Variable for keeping track of pets found
+        int numberOfPets = 0;
+
+        // Prints table header
+        printTableHeader();
+        // Gets list of pets
+        ArrayList<Pet> pets = db.getPets();
+
+        // For loop for finding each pet by age
+        for (int i = 0; i < pets.size(); i++) {
+            if (pets.get(i).getAge() == age) {
+                printTableRow(i, pets.get(i).getName(), pets.get(i).getAge());
+                numberOfPets++;
+            }
+        }
+        // Prints table footer
+        printTableFooter(numberOfPets);
+    }
+
     // Gets and returns choice
     public static int getChoice(){
         // Menu
@@ -83,6 +109,7 @@ public class Main {
         System.out.println(" 1) View all pets");
         System.out.println(" 2) Add a new pet");
         System.out.println(" 3) Search pets by name");
+        System.out.println(" 4) Search pets by age");
         System.out.println(" 5) Exit program");
 
         System.out.print("Your choice: ");
