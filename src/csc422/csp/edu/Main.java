@@ -43,14 +43,44 @@ public class Main {
                 case 5:
                     removePet();
                     break;
-                // Break loop
                 case 6:
+                    updatePet();
+                    break;
+                // Break loop
+                case 7:
                     break loop;
+
             }
         }
     }
 
     /* Methods */
+
+    // Method for updating a pet
+    private static void updatePet() {
+        // Displays all pets
+        showAllPets();
+        // Getting input
+        System.out.print("Enter the pet ID you can to update:");
+        int id = input.nextInt();
+        System.out.print("Enter new name and new age:");
+
+        // Getting the pet at entered ID
+        Pet pet = db.getPets().get(id);
+
+        // Getting the name and age values
+        String oldName = pet.getName();
+        int oldAge = pet.getAge();
+        String newName = input.next();
+        int newAge = input.nextInt();
+
+        //Assigning a new name and age to a pet
+        pet.setName(newName);
+        pet.setAge(newAge);
+
+        // Output
+        System.out.println(oldName + " " + oldAge + " has been updated to " + newName + " " + newAge + ".");
+    }
 
     // Method for removing a pet
     public static void removePet() {
@@ -62,7 +92,7 @@ public class Main {
 
         //Gets ID and removes selected ID from the pet DB
         int id = input.nextInt();
-        System.out.println(db.getPet(id).getName() + " " + db.getPet(id).getAge() + " is removed");
+        System.out.println(db.getPets().get(id).getName() + " " + db.getPets().get(id).getAge() + " is removed");
         db.remove(id);
 
     }
@@ -128,7 +158,8 @@ public class Main {
         System.out.println(" 3) Search pets by name");
         System.out.println(" 4) Search pets by age");
         System.out.println(" 5) Remove an existing pet");
-        System.out.println(" 6) Exit program");
+        System.out.println(" 6) Update an existing pet");
+        System.out.println(" 7) Exit program");
 
         System.out.print("Your choice: ");
         // Returns choice
