@@ -38,7 +38,7 @@ public class Main {
                     break;
                 // Search for a pet by age
                 case 4:
-                    searchByAge();
+                    searchAge();
                     break;
                 // Break loop
                 case 5:
@@ -78,7 +78,7 @@ public class Main {
     }
 
     // Search for pet by age
-    private static void searchByAge() {
+    private static void searchAge() {
         // Gettting input
         System.out.print("Enter age to search:");
         int age = input.nextInt();
