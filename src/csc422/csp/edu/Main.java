@@ -32,19 +32,21 @@ public class Main {
                 case 2:
                     addPet();
                     break;
-                // Search for a pet by name
+                // Update a pet
                 case 3:
+                    updatePet();
+                    break;
+                // Remove a pet
+                case 4:
+                    removePet();
+                    break;
+                // Search for a pet by name
+                case 5:
                     searchName();
                     break;
                 // Search for a pet by age
-                case 4:
-                    searchAge();
-                    break;
-                case 5:
-                    removePet();
-                    break;
                 case 6:
-                    updatePet();
+                    searchAge();
                     break;
                 // Break loop
                 case 7:
@@ -61,9 +63,9 @@ public class Main {
         // Displays all pets
         showAllPets();
         // Getting input
-        System.out.print("Enter the pet ID you can to update:");
+        System.out.print("Enter the pet ID you can to update: ");
         int id = input.nextInt();
-        System.out.print("Enter new name and new age:");
+        System.out.print("Enter new name and new age: ");
 
         // Getting the pet at entered ID
         Pet pet = db.getPets().get(id);
@@ -127,7 +129,7 @@ public class Main {
     // Search for pet by age
     private static void searchAge() {
         // Getting input
-        System.out.print("Enter age to search:");
+        System.out.print("Enter age to search: ");
         int age = input.nextInt();
 
         // Variable for keeping track of pets found
@@ -154,11 +156,11 @@ public class Main {
         // Menu
         System.out.println("What would you like to do?");
         System.out.println(" 1) View all pets");
-        System.out.println(" 2) Add a new pet");
-        System.out.println(" 3) Search pets by name");
-        System.out.println(" 4) Search pets by age");
-        System.out.println(" 5) Remove an existing pet");
-        System.out.println(" 6) Update an existing pet");
+        System.out.println(" 2) Add more pets");
+        System.out.println(" 3) Update an existing pet");
+        System.out.println(" 4) Remove an existing pet");
+        System.out.println(" 5) Search pets by name");
+        System.out.println(" 6) Search pets by age");
         System.out.println(" 7) Exit program");
 
         System.out.print("Your choice: ");
