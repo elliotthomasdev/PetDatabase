@@ -7,12 +7,14 @@ public class Main {
 
     // Create new scanner
     private static final Scanner input = new Scanner(System.in);
-
     // Create the pet database
     private static final PetDatabase db = new PetDatabase();
 
     // Main
     public static void main(String[] args) {
+
+        // Load all the pets
+        db.load();
 
         // Title message
         System.out.println("Pet Database Program.");
@@ -54,6 +56,9 @@ public class Main {
 
             }
         }
+
+        // Save all the pets
+        db.save();
     }
 
     /* Methods */
