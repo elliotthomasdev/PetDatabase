@@ -53,7 +53,8 @@ public class Main {
                 // Break loop
                 case 7:
                     break loop;
-
+                default:
+                    System.out.println("Please enter only 1-7");
             }
         }
 
@@ -94,14 +95,32 @@ public class Main {
         // Displays the list of pets
         showAllPets();
 
-        // Prompts user for ID
-        System.out.print("Enter the pet ID to remove: ");
+        // Variables for error handling
+        boolean invalid = true;
+        int choice = 0;
+        int size = db.getCount()-1;
 
+        // input loop
+        while (invalid){
+
+            try{
+                // Prompts user for ID
+                System.out.print("Enter the pet ID to remove: ");
+                choice = Integer.parseInt(input.nextLine());
+
+                if(choice >= 0 && choice <= size){
+                    invalid = false;
+                }
+                else{
+                    System.out.println("Invalid input. Please enter only 0 through " + size + ".");
+                }
+            }catch (NumberFormatException e){
+                System.out.println("Please only enter an integer.");
+            }
+        }
         //Gets ID and removes selected ID from the pet DB
-        int id = input.nextInt();
-        System.out.println(db.getPets().get(id).getName() + " " + db.getPets().get(id).getAge() + " is removed");
-        db.remove(id);
-
+        System.out.println(db.getPets().get(choice).getName() + " " + db.getPets().get(choice).getAge() + " is removed");
+        db.remove(choice);
     }
 
     // Search for pet by name
@@ -210,24 +229,58 @@ public class Main {
 
     // Method for adding a pet
     public static void addPet() {
+
         // Variable for keeping track of how many pets have been added
         int tmp = db.getCount();
+        // Variable for tracking pets added
+        int track;
 
-        // Eating next line
-        input.nextLine();
-
-        // Loop for getting pet input - stops if user enters "done"
-        while(true){
-            System.out.print("add pet (name, age) 'done' to stop: ");
-            String line = input.nextLine().trim();
-            if (line.equalsIgnoreCase("done")) break;
-
-            //Splits input into values to add to the DB
-            String[] result = line.split(" ");
-            db.add(new Pet(result[0], Integer.parseInt(result[1])));
+        // if the database has 5 pets don't let the user add any more
+        if(tmp >= 5){
+            System.out.println("You can only save 5 pets. Remove pets to add more.");
         }
-        // Lets the user know how many pets have been added
-        int count = db.getCount()-tmp;
-        System.out.println(count + " pets added.");
+        else{
+
+            // Eating next line
+            input.nextLine();
+
+            // Loop for getting pet input - stops if user enters "done"
+            while(true){
+
+                track = db.getCount();
+
+                // if 5 pets have been added already stop the add loop
+                if(track >= 5){
+                    System.out.println("You have reached the 5 pet limit.");
+                    break;
+                }
+                else{
+                    System.out.print("add pet (name, age) 'done' to stop: ");
+                    String line = input.nextLine().trim();
+                    if (line.equalsIgnoreCase("done")) break;
+
+                    //Splits input into values to add to the DB
+                    String[] result = line.split(" ");
+
+                    // if the input is more than two values inform the user and re prompts
+                    if(result.length > 2){
+                        System.out.println("Please enter only two values (name, age)");
+                    }
+                    else{
+
+                        // Validates age
+                        if(Integer.parseInt(result[1]) < 1 || Integer.parseInt(result[1]) > 20){
+                            System.out.println("Age should be between 1 and 20 try again.");
+                        }
+                        else{
+                            db.add(new Pet(result[0], Integer.parseInt(result[1])));
+                        }
+                    }
+                }
+            }
+            // Lets the user know how many pets have been added
+            int petsAdded = db.getCount()-tmp;
+            System.out.println(petsAdded + " pets added.");
+        }
     }
 }
